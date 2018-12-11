@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Blog</title>
-</head>
-<body>
-
-<h1><a href="">My Blog</a></h1>
-
+{% extends 'blog/base.html' %}
+{% block content %}
 <div>
     {% for post in posts %}
         <h2><a href="post/{{post.pk}}">{{ post.title }}</a></h2>
@@ -15,6 +7,4 @@
         <p>{{ post.post_text }}</p>
     {% endfor %}
 </div>
-
-</body>
-</html>
+{% endblock %}

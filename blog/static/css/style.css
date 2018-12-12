@@ -31,3 +31,14 @@
     color:grey;
 }
 
+.post-form-blog label{
+    width:100px;
+}
+
+.post-form-blog .btn-primary{
+    float:right;
+}
+
+.post-form-blog textarea{
+    width:585px;
+}

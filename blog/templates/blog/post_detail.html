@@ -3,7 +3,9 @@
 {% block content %}
     {% if post.published_date %}
         <div class="post">
-            <a href="/post/{{post.pk}}/edit/"><i class="fas fa-edit"></i></a>
+            {% if user.is_authenticated %}
+                <a href="/post/{{post.pk}}/edit/"><i class="fas fa-edit"></i></a>
+              {% endif %}
             <div class="date">
                 {{ post.published_date }}
             </div>

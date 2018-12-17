@@ -17,7 +17,7 @@ def post_detail(request, pk):
 # Create your views here.
 
 
-def edit_post(request):
+def new_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -28,8 +28,26 @@ def edit_post(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-        stuff_frontend = {'form': form}
+        title = "New Post"
+        stuff_frontend = {'form': form, 'title': title}
     return render(request, 'blog/post_edit.html', stuff_frontend)
 
+
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.pk = pk
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+        title = "Edit Post"
+        stuff_frontend = {'form': form, 'title': title}
+    return render(request, 'blog/post_edit.html', stuff_frontend)
 
 

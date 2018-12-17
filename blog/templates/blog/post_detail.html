@@ -3,6 +3,7 @@
 {% block content %}
     {% if post.published_date %}
         <div class="post">
+            <a href="/post/{{post.pk}}/edit/"><i class="fas fa-edit"></i></a>
             <div class="date">
                 {{ post.published_date }}
             </div>

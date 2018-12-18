@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.utils import timezone
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 
 
 def post_list(request):
@@ -16,7 +17,7 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', stuff_frontend)
 # Create your views here.
 
-
+@login_required
 def new_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -31,7 +32,7 @@ def new_post(request):
         stuff_frontend = {'form': form, 'title': title}
     return render(request, 'blog/post_edit.html', stuff_frontend)
 
-
+@login_required
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -45,16 +46,16 @@ def edit_post(request, pk):
     else:
         form = PostForm(instance=post)
         title = "Edit Post"
-        stuff_frontend = {'form': form, 'title': title}
+        stuff_frontend = {'form': form, 'title': title, 'post': post}
     return render(request, 'blog/post_edit.html', stuff_frontend)
 
-
+@login_required
 def draft_post(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
     stuff_frontend = {'posts':posts}
     return render(request, 'blog/post_draft_list.html', stuff_frontend)
 
-
+@login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()

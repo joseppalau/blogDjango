@@ -33,12 +33,16 @@
     color:grey;
 }
 
+.post-form-blog{
+    margin-top:25px;
+}
+
 .post-form-blog label{
     width:100px;
 }
 
 .post-form-blog .btn-primary{
-    float:right;
+    float:left;
 }
 
 .post-form-blog textarea{

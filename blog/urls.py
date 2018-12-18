@@ -9,5 +9,3 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.edit_post, name="edit_post"),
     path('post/<int:pk>/publish/', views.post_publish, name="post_publish"),
 ]
-
-

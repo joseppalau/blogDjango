@@ -12,7 +12,7 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    stuff_frontend = {'post':post}
+    stuff_frontend = {'post': post}
     return render(request, 'blog/post_detail.html', stuff_frontend)
 # Create your views here.
 
@@ -23,7 +23,6 @@ def new_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -41,7 +40,6 @@ def edit_post(request, pk):
             post = form.save(commit=False)
             post.author = request.user
             post.pk = pk
-            post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -49,5 +47,17 @@ def edit_post(request, pk):
         title = "Edit Post"
         stuff_frontend = {'form': form, 'title': title}
     return render(request, 'blog/post_edit.html', stuff_frontend)
+
+
+def draft_post(request):
+    posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
+    stuff_frontend = {'posts':posts}
+    return render(request, 'blog/post_draft_list.html', stuff_frontend)
+
+
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect(request, 'blog/post_list.html')
 
 

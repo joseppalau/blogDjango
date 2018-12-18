@@ -1,15 +1,18 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    {% if post.published_date %}
         <div class="post">
             {% if user.is_authenticated %}
-                <a href="/post/{{post.pk}}/edit/"><i class="fas fa-edit"></i></a>
-              {% endif %}
-            <div class="date">
-                {{ post.published_date }}
-            </div>
+                <a href="/post/{{post.pk}}/edit/"><i class="fas fa-edit fa-2x"></i></a>
+                {% if post.published_date == none %}
+                    <a href="/post/{{post.pk}}/publish" class="btn btn-primary">Publicar</a>
+                {% endif %}
             {% endif %}
+            <div class="date">
+                {% if post.published_date %}
+                    {{ post.published_date }}
+                {% endif %}
+            </div>
              <h1>{{ post.title }}</h1>
              <p>{{ post.post_text }}</p>
         </div>

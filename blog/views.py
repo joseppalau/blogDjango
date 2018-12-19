@@ -79,7 +79,7 @@ def add_comment_to_post(request, pk):
         return render(request, 'blog/add_comment_to_post.html', stuff_frontend)
 
 
-def remove_comment(request, pk):
+def remove_comment(pk):
     comment = get_object_or_404(Comment, pk)
     comment.delete()
-    return redirect('blog/post_detail.html', pk=comment.post.pk)
+    return redirect('post_detail', pk=comment.post.pk)

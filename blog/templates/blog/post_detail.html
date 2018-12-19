@@ -25,7 +25,8 @@
           {% for comment in post.comments.all %}
             <div>
                 <div class="date">
-                    {{comment.created_date}}
+                    <p>{{comment.created_date}}</p>
+                    <a href="{% url 'remove_comment' pk=comment.pk %}"><i class="fas fa-trash-alt"></i></a>
                 </div>
                 <p><strong>{{comment.author}}</strong></p>
                 <p>{{comment.text}}</p>

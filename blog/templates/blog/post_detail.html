@@ -22,8 +22,6 @@
         <div>
             <a href="{% url 'add_comment' pk=post.pk %}" class="btn btn-primary" style="margin-bottom:25px">New Comment</a>
         </div>
-
-
           {% for comment in post.comments.all %}
             <div>
                 <div class="date">

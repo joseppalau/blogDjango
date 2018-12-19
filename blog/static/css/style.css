@@ -7,14 +7,26 @@
     align-items:center;
     margin-bottom:20px;
 }
-.page-header h1{
-    padding-left:20px;
-}
 .page-header a{
+    padding-left:20px;
     color:white;
-    text-decoration:none;
+}
+.top-menu{
+    color:white;
+    float:right;
+    margin-right:20px;
+}
+
+.nav-item{
     float:right;
 }
+
+.nav-item p{
+    color:white;
+    font-size:10px;
+    text-align:center;
+}
+
 .container{
     margin-top:25px;
     padding-left: 0px;
@@ -47,4 +59,12 @@
 
 .post-form-blog textarea{
     width:585px;
+}
+
+.login-post{
+margin-top:25px;
+}
+
+.login-post label{
+width:80px;
 }

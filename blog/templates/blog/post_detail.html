@@ -9,6 +9,7 @@
                 {% if post.published_date == none %}
                     <a href="/post/{{post.pk}}/publish" class="btn btn-primary">Publicar</a>
                 {% endif %}
+                <a href="{% url 'remove_post' pk=post.pk %}" class="btn btn-danger">Delete</a>
             {% endif %}
             <div class="date">
                 {% if post.published_date %}

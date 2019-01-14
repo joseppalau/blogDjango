@@ -4,8 +4,6 @@
 
 {% block content %}
 
-    <div class="container">
-
         {% if user.is_authenticated %}
              <a href="/post/new"><i class="fas fa-plus fa-2x"></i></a>
              <a href="{% url 'post_draft' %}"><i class="fab fa-firstdraft fa-2x"></i></a>
@@ -25,7 +23,5 @@
           <p style="color:grey">by: {{post.author}}</p>
       </div>
       {% endfor %}
-
-    </div>
 
 {% endblock %}

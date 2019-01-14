@@ -15,27 +15,34 @@
 <body>
 <div class = "page-header">
     <h1><a href="/">My Blog</a></h1>
-    <ul class="nav justify-content-end">
-      {% if user.is_authenticated %}
-          <li class="nav-item">
-              <a href="/post/new" class="top-menu"><i class="fas fa-plus"></i></a>
-              <p>Add Post</p>
-          </li>
-          <li class="nav-item">
-              <a href="{% url 'post_draft' %}" class="top-menu"><i class="fab fa-firstdraft"></i></a>
-              <p>Drafts</p>
-          </li>
-          <li class="nav-item">
-              <a href="/accounts/logout" class="top-menu"><i class="fas fa-sign-out-alt"></i></a>
-              <p>Logout</p>
-          </li>
-     {% else %}
-         <li class="nav-item">
-             <a href="/accounts/login" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-             <p>Login</p>
-         </li>
-     {% endif %}
+    <ul>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="/post/new"><i class="fas fa-plus"></i></a>
+                <p>Add Post</p>
+            </li>
+            <li>
+                <a href="{% url 'post_draft' %}"><i class="fab fa-firstdraft"></i></a>
+                <p>Drafts</p>
+            </li>
+            <li>
+                <a href="/accounts/logout"><i class="fas fa-sign-out-alt"></i></a>
+                <p>Logout</p>
+            </li>
+        {% else %}
+            <li>
+                <a href="/accounts/login"><i class="fas fa-sign-in-alt"></i></a>
+                <p>Login</p>
+            </li>
+        {% endif %}
     </ul>
+</div>
+<div class="nav-user">
+    {% if user.is_authenticated %}
+        <p><span style="color:orange">{{user.username}}</span> in the blog</p>
+    {% else %}
+        <p><a href="/accounts/login">Log in</a> to edit your posts</p>
+    {% endif %}
 </div>
 
 <div class="container">

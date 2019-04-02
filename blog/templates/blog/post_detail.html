@@ -4,7 +4,7 @@
 
 {% block content %}
         <div class="post">
-            {% if user.is_authenticated %}
+            {% if request.user == post.author %}
                 <a href="/post/{{post.pk}}/edit/"><i class="fas fa-edit fa-2x"></i></a>
                 {% if post.published_date == none %}
                     <a href="/post/{{post.pk}}/publish" class="btn btn-primary">Publicar</a>
@@ -25,18 +25,15 @@
         </div>
           {% for comment in post.comments.all %}
             <div>
-                {% if user.is_authenticated or comment.approved %}
-                    <div class="date">
-                        <p>{{comment.created_date}}</p>
-                    </div>
-                    {% if not comment.approved and user.is_superuser %}
-                        <a href="{% url 'remove_comment' pk=comment.pk %}"><i class="fas fa-trash-alt"></i></a>
-                        <a href="{% url 'approve_comment' pk=comment.pk %}"><i class="fas fa-check"></i></a>
-                    {% endif %}
-                    <p><strong>{{comment.author}}</strong></p>
-                    <p>{{comment.text}}</p>
-                    <br>
+                <div class="date">
+                    <p>{{comment.created_date}}</p>
+                </div>
+                {% if request.user == comment.author %}
+                <a href="{% url 'remove_comment' pk=comment.pk %}"><i class="fas fa-trash-alt"></i></a>
                 {% endif %}
+                <p><strong>{{comment.author.username}}</strong></p>
+                <p>{{comment.text}}</p>
+                <br>
             </div>
             {% empty %}
             <p>No comments yet...</p>

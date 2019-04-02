@@ -20,7 +20,7 @@
               <p>Created on: {{ post.published_date }}</p>
           </div>
           <p>{{ post.post_text }}</p>
-          <a href="{% url 'post_detail' pk=post.pk  %}">Comments: {{post.approve_comments.count}}</a>
+          <a href="{% url 'post_detail' pk=post.pk  %}">Comments: {{post.comments.count}}</a>
           <p style="color:grey">Visits: {{ post.visits }}</p>
           <p style="color:grey">by: {{post.author}}</p>
       </div>
